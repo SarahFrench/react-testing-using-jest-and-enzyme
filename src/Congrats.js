@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 /**
  * Functional component that congratulates user after guessing the word
@@ -16,6 +17,10 @@ const Congrats = ({ success }) => {
   } else {
     return <div data-test="component-congrats"></div>;
   }
+};
+
+Congrats.propTypes = {
+  success: PropTypes.bool.isRequired,
 };
 
 export default Congrats;
