@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import Congrats from "./Congrats";
+import GuessedWords from "./GuessedWords";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App ">
+      <h1>Jotto</h1>
+      <Congrats success={true} />
+      <GuessedWords
+        guessedWords={[{ guessedWord: "train", letterMatchCount: 3 }]}
+      />
     </div>
   );
-}
+};
 
 export default App;
