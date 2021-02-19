@@ -6,7 +6,7 @@ import Input from "./Input";
 //Could not find "store" in the context of "Connect(Input)". Either wrap the root component in a <Provider>, or pass a custom React context provider to <Provider> and the corresponding React context consumer to Connect(Input) in connect options.
 
 const setup = (initialState = {}) => {
-  const wrapper = shallow(<Input store={storeFactory()} />)
+  const wrapper = shallow(<Input store={storeFactory(initialState)} />)
     .dive()
     .dive();
   return wrapper;
