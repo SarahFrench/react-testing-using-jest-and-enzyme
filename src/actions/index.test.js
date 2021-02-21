@@ -21,7 +21,8 @@ describe("getSecretWord", () => {
       });
     });
 
-    //return means it'll wait for the Promise (?)
+    //IMPORTANT
+    //return means it'll wait for the Promise
     return store.dispatch(getSecretWord()).then(() => {
       const newState = store.getState();
       expect(newState.secretWord).toBe(secretWord);
