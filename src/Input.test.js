@@ -67,4 +67,9 @@ describe("redux props", () => {
     const successProp = wrapper.instance().props.success; //this only works on Class based components, errors on functional components
     expect(successProp).toBe(success);
   });
+  test("`guessWord` action create is a function prop", () => {
+    const wrapper = setup();
+    const guessWordProp = wrapper.instance().props.guessWord;
+    expect(guessWordProp).toBeInstanceOf(Function);
+  });
 });
