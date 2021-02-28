@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { getSecretWord, guessWord } from "./actions";
@@ -8,6 +8,8 @@ import Input from "./Input";
 
 export class UnconnectedApp extends Component {
   componentDidMount() {
+    //get the secret word and store in Redux store
+    this.props.getSecretWord();
   }
 
   render() {
