@@ -20,8 +20,8 @@ describe("redux props", () => {
   });
   test("receives `guessWord` action creator as a prop, and it's a function", () => {
     const wrapper = setup();
-    const getSecretWordProp = wrapper.instance().props.guessWord;
-    expect(getSecretWordProp).toBeInstanceOf(Function);
+    const guessWordProp = wrapper.instance().props.guessWord;
+    expect(guessWordProp).toBeInstanceOf(Function);
   });
   test("receives `secretWord` state as a prop", () => {
     const secretWord = "potato";
