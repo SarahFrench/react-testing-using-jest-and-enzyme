@@ -6,10 +6,10 @@ import Congrats from "./Congrats";
 import GuessedWords from "./GuessedWords";
 import Input from "./Input";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+export class UnconnectedApp extends Component {
+  componentDidMount() {
   }
+
   render() {
     return (
       <div className="App container">
@@ -23,8 +23,12 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  //state from the redux store passed in as props here
   const { success, guessedWords, secretWord } = state;
   return { success, guessedWords, secretWord };
 };
 
-export default connect(mapStateToProps, { getSecretWord, guessWord })(App);
+//action creators passed in here
+export default connect(mapStateToProps, { getSecretWord, guessWord })(
+  UnconnectedApp
+);
