@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { guessWord } from "./actions";
 
-class Input extends React.Component {
+export class UnconnectedInput extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -21,6 +21,7 @@ class Input extends React.Component {
           data-test="submit-button"
           className="btn btn-primary mb-2"
           type="submit"
+          onClick={() => this.props.guessWord("train")}
         >
           Submit
         </button>
@@ -35,4 +36,4 @@ const mapStateToProps = ({ success }) => {
 };
 
 //provide guessWord action creator as prop to component
-export default connect(mapStateToProps, { guessWord })(Input);
+export default connect(mapStateToProps, { guessWord })(UnconnectedInput);

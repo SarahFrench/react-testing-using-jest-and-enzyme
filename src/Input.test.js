@@ -2,7 +2,7 @@ import { shallow } from "enzyme";
 import React from "react";
 
 import { findByTestAttr, storeFactory } from "../test/testUtils";
-import Input from "./Input";
+import Input, { UnconnectedInput } from "./Input";
 
 //Could not find "store" in the context of "Connect(Input)". Either wrap the root component in a <Provider>, or pass a custom React context provider to <Provider> and the corresponding React context consumer to Connect(Input) in connect options.
 
@@ -72,4 +72,19 @@ describe("redux props", () => {
     const guessWordProp = wrapper.instance().props.guessWord;
     expect(guessWordProp).toBeInstanceOf(Function);
   });
+});
+
+test("guessWord runs when user clicks the submit button", () => {
+  const guessWordMock = jest.fn();
+  const props = {
+    guessWord: guessWordMock,
+    success: false,
+  };
+  const wrapper = shallow(<UnconnectedInput {...props} />);
+
+  const submitButton = findByTestAttr(wrapper, "submit-button");
+  submitButton.simulate("click");
+
+  expect(guessWordMock).toBeCalledTimes(1);
+  expect(guessWordMock).toBeCalledWith("");
 });
