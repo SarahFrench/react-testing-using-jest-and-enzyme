@@ -94,11 +94,14 @@ describe("guessWord action creator call", () => {
     submitButton.simulate("click", { preventDefault: () => {} });
   });
 
-  afterEach(() => {});
-
   test("guessWord runs when user clicks the submit button", () => {
     expect(guessWordMock).toBeCalledTimes(1);
+  });
+  test("guessWord is called with the contents of the input box", () => {
     const mockArgument = guessWordMock.mock.calls[0][0];
     expect(mockArgument).toBe(guessedWord);
+  });
+  test("Input box is cleared after the user clicks submit", () => {
+    expect(wrapper.state("currentGuess")).toBe("");
   });
 });

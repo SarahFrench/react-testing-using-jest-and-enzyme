@@ -7,7 +7,7 @@ export class UnconnectedInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentGuess: null,
+      currentGuess: "",
     };
 
     //bind this for submit guessed word
@@ -19,6 +19,7 @@ export class UnconnectedInput extends React.Component {
     let guessedWord = this.state.currentGuess;
     if (guessedWord && guessedWord.length > 0) {
       this.props.guessWord(guessedWord);
+      this.setState({ currentGuess: "" });
     }
   };
 
