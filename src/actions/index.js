@@ -37,3 +37,17 @@ export const getSecretWord = () => {
     });
   };
 };
+
+export const resetGame = () => {
+  return async (dispatch) => {
+    return axios.get("http://localhost:3030").then((response) => {
+      dispatch({
+        type: actionTypes.SET_SECRET_WORD,
+        payload: response.data,
+      });
+      dispatch({
+        type: actionTypes.RESET_GAME,
+      });
+    });
+  };
+};
