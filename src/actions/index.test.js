@@ -10,7 +10,7 @@ describe("getSecretWord", () => {
   afterEach(() => {
     moxios.uninstall();
   });
-  test("adds response word to state", () => {
+  test("adds response word to state", async () => {
     const secretWord = "party";
     const store = storeFactory();
     moxios.wait(() => {
@@ -22,10 +22,10 @@ describe("getSecretWord", () => {
     });
 
     //IMPORTANT
-    //return means it'll wait for the Promise
-    return store.dispatch(getSecretWord()).then(() => {
-      const newState = store.getState();
-      expect(newState.secretWord).toBe(secretWord);
-    });
+    //wait for the Promise from dispatch before assertions
+    await store.dispatch(getSecretWord());
+    const newState = store.getState();
+    expect(newState.secretWord).toBe(secretWord);
   });
+});
 });
