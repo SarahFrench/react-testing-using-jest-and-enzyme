@@ -6,6 +6,9 @@ import { guessWord } from "./actions";
 export class UnconnectedInput extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentGuess: null,
+    };
   }
 
   render() {
@@ -15,6 +18,10 @@ export class UnconnectedInput extends React.Component {
           data-test="input-box"
           className="mb-2 mx-sm-3"
           type="text"
+          value={this.state.currentGuess}
+          onChange={(event) => {
+            this.setState({ currentGuess: event.target.value });
+          }}
           placeholder="enter guess"
         />
         <button
