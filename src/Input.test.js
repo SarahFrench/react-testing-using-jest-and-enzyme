@@ -91,7 +91,7 @@ describe("guessWord action creator call", () => {
     //add value to input box
     wrapper.setState({ currentGuess: guessedWord });
     //click submit
-    submitButton.simulate("click");
+    submitButton.simulate("click", { preventDefault: () => {} });
   });
 
   afterEach(() => {});

@@ -9,7 +9,18 @@ export class UnconnectedInput extends React.Component {
     this.state = {
       currentGuess: null,
     };
+
+    //bind this for submit guessed word
+    this.submitGuessedWord = this.submitGuessedWord.bind(this);
   }
+
+  submitGuessedWord = (event) => {
+    event.preventDefault();
+    let guessedWord = this.state.currentGuess;
+    if (guessedWord && guessedWord.length > 0) {
+      this.props.guessWord(guessedWord);
+    }
+  };
 
   render() {
     const contents = this.props.success ? null : (
@@ -28,7 +39,9 @@ export class UnconnectedInput extends React.Component {
           data-test="submit-button"
           className="btn btn-primary mb-2"
           type="submit"
-          onClick={() => this.props.guessWord("train")}
+          onClick={(event) => {
+            this.submitGuessedWord(event);
+          }}
         >
           Submit
         </button>
