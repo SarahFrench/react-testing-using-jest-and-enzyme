@@ -47,12 +47,19 @@ describe("if there are words guessed", () => {
     const component = findByTestAttr(wrapper, "component-guessed-words");
     expect(component.length).toBe(1);
   });
-  test("it renders a 'guessed word' section", () => {
+  test("it renders a `guessed words` section", () => {
     const guessedWordsNode = findByTestAttr(wrapper, "guessed-words");
     expect(guessedWordsNode.length).toBe(1);
   });
-  test("it renders the correct number of guessed words", () => {
+  test("it renders the correct number of `guessed word` rows", () => {
     const guessedWordNodes = findByTestAttr(wrapper, "guessed-word");
     expect(guessedWordNodes.length).toBe(guessedWords.length);
+  });
+  test("it renders the number of each guess alongside it", () => {
+    const guessedWordIndexNodes = findByTestAttr(wrapper, "guessed-word-index");
+    expect(guessedWordIndexNodes.length).toBe(guessedWords.length);
+    guessedWordIndexNodes.forEach((node, index) => {
+      expect(parseInt(node.text())).toBe(index + 1);
+    });
   });
 });
