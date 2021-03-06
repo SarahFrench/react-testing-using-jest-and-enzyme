@@ -36,6 +36,10 @@ describe("render", () => {
       const submitButton = findByTestAttr(wrapper, "submit-button");
       expect(submitButton.length).toBe(1);
     });
+    test("renders give up button", () => {
+      const giveUpButton = findByTestAttr(wrapper, "give-up-button");
+      expect(giveUpButton.length).toBe(1);
+    });
   });
   describe("word has been guessed", () => {
     let wrapper;
@@ -56,6 +60,10 @@ describe("render", () => {
     test("does not render submit button", () => {
       const submitButton = findByTestAttr(wrapper, "submit-button");
       expect(submitButton.length).toBe(0);
+    });
+    test("does not render give up button", () => {
+      const giveUpButton = findByTestAttr(wrapper, "give-up-button");
+      expect(giveUpButton.length).toBe(0);
     });
   });
 });

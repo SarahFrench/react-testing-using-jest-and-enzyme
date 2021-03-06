@@ -22,6 +22,7 @@ export class UnconnectedInput extends React.Component {
       this.setState({ currentGuess: "" });
     }
   };
+  //Challenge 3 in Section 99 of course - added Give Up button
 
   render() {
     const contents = this.props.success ? null : (
@@ -44,7 +45,10 @@ export class UnconnectedInput extends React.Component {
             this.submitGuessedWord(event);
           }}
         >
-          Submit
+          Guess
+        </button>
+        <button data-test="give-up-button" className="btn btn-danger mb-2">
+          Give Up
         </button>
       </form>
     );
