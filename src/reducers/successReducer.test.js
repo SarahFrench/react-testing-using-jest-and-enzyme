@@ -12,3 +12,10 @@ test("returns `true` after receiving an action of type CORRECT_GUESS", () => {
   });
   expect(newState).toBe(true);
 });
+
+test("returns `false` after receiving an action of type RESET_GAME", () => {
+  const newState = successReducer(undefined, {
+    type: actionTypes.RESET_GAME,
+  });
+  expect(newState).toBe(false);
+});

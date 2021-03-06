@@ -83,4 +83,32 @@ describe("resetGame", () => {
     const newState = store.getState();
     expect(newState.guessedWords).toHaveLength(0);
   });
+  test("sets success to false", async () => {
+    const guessedWords = [
+      { guessedWord: "train", letterMatchCount: 3 },
+      { guessedWord: "agile", letterMatchCount: 1 },
+      { guessedWord: "party", letterMatchCount: 5 },
+    ];
+    const success = true;
+    const newSecretWord = "potato";
+    const store = storeFactory({ success, guessedWords });
+
+    //set up moxios to return different secret word
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: newSecretWord,
+      });
+    });
+
+    const oldState = store.getState();
+    expect(oldState.success).toBe(true);
+
+    //dispatch reset game
+    await store.dispatch(resetGame());
+
+    const newState = store.getState();
+    expect(newState.success).toBe(false);
+  });
 });
