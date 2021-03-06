@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { resetGame } from "./actions";
 
 export class UnconnectedNewWord extends Component {
-  //TODO - Challenge 2 in Section 99 of course
-
+  //Challenge 2 in Section 99 of course
   render() {
     if (this.props.success) {
       return (
