@@ -1,7 +1,7 @@
 import moxios from "moxios";
 
 import { storeFactory } from "../../test/testUtils";
-import { getSecretWord, resetGame } from "./";
+import { getSecretWord, resetGame, giveUp } from "./";
 
 describe("getSecretWord", () => {
   beforeEach(() => {
@@ -110,5 +110,19 @@ describe("resetGame", () => {
 
     const newState = store.getState();
     expect(newState.success).toBe(false);
+  });
+});
+
+describe("giveUp", () => {
+  test("sets giveUp in state to true", async () => {
+    const givenUpBefore = false;
+    const givenUpAfter = true;
+    const store = storeFactory({ givenUp: givenUpBefore });
+
+    //dispatch reset game
+    await store.dispatch(giveUp());
+
+    const newState = store.getState();
+    expect(newState.givenUp).toBe(givenUpAfter);
   });
 });

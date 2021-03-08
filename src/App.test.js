@@ -18,11 +18,6 @@ describe("redux props", () => {
     const getSecretWord = wrapper.instance().props.getSecretWord;
     expect(getSecretWord).toBeInstanceOf(Function);
   });
-  test("receives `guessWord` action creator as a prop, and it's a function", () => {
-    const wrapper = setup();
-    const guessWordProp = wrapper.instance().props.guessWord;
-    expect(guessWordProp).toBeInstanceOf(Function);
-  });
   test("receives `secretWord` state as a prop", () => {
     const secretWord = "potato";
     const wrapper = setup({ secretWord });
@@ -53,6 +48,7 @@ test("getSecretWord runs on App mount", () => {
   const getSecretWordMock = jest.fn();
   const props = {
     getSecretWord: getSecretWordMock,
+    givenUp: false,
     success: false,
     guessedWords: [],
   };

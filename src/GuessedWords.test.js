@@ -9,6 +9,7 @@ const defaultProps = {
 };
 
 const setup = (props = {}) => {
+  //GuessedWords is an unconnected component so setup only passes props, no store
   const setupProps = { ...defaultProps, ...props };
   return shallow(<GuessedWords {...setupProps} />);
 };

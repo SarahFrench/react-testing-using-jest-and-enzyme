@@ -6,7 +6,9 @@ import { resetGame } from "./actions";
 export class UnconnectedNewWord extends Component {
   //Challenge 2 in Section 99 of course
   render() {
-    if (this.props.success) {
+    // User has won, or they've given up
+    const showNewWord = this.props.success || this.props.givenUp;
+    if (showNewWord) {
       return (
         <button
           data-test="component-new-word"
@@ -21,8 +23,8 @@ export class UnconnectedNewWord extends Component {
   }
 }
 
-const mapStateToProps = ({ success }) => {
-  return { success };
+const mapStateToProps = ({ success, givenUp }) => {
+  return { success, givenUp };
 };
 
 export default connect(mapStateToProps, { resetGame })(UnconnectedNewWord);

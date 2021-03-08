@@ -19,3 +19,10 @@ test("returns `false` after receiving an action of type RESET_GAME", () => {
   });
   expect(newState).toBe(false);
 });
+
+test("returns `false` after receiving an action of type GIVE_UP", () => {
+  const newState = successReducer(undefined, {
+    type: actionTypes.GIVE_UP,
+  });
+  expect(newState).toBe(false);
+});

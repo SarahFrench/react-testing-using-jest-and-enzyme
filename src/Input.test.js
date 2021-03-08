@@ -75,10 +75,21 @@ describe("redux props", () => {
     const successProp = wrapper.instance().props.success; //this only works on Class based components, errors on functional components
     expect(successProp).toBe(success);
   });
-  test("`guessWord` action create is a function prop", () => {
+  test("has givenUp piece of state as prop", () => {
+    const givenUp = true; //could also be false, either works
+    const wrapper = setup({ givenUp });
+    const givenUpProp = wrapper.instance().props.givenUp; //this only works on Class based components, errors on functional components
+    expect(givenUpProp).toBe(givenUp);
+  });
+  test("`guessWord` action creator is a function prop", () => {
     const wrapper = setup();
     const guessWordProp = wrapper.instance().props.guessWord;
     expect(guessWordProp).toBeInstanceOf(Function);
+  });
+  test("`giveUp` action creator is a function prop", () => {
+    const wrapper = setup();
+    const giveUpProp = wrapper.instance().props.giveUp;
+    expect(giveUpProp).toBeInstanceOf(Function);
   });
 });
 
@@ -92,6 +103,7 @@ describe("guessWord action creator call", () => {
     const props = {
       guessWord: guessWordMock,
       success: false,
+      givenUp: false,
     };
     wrapper = shallow(<UnconnectedInput {...props} />);
     const submitButton = findByTestAttr(wrapper, "submit-button");
@@ -111,5 +123,21 @@ describe("guessWord action creator call", () => {
   });
   test("Input box is cleared after the user clicks submit", () => {
     expect(wrapper.state("currentGuess")).toBe("");
+  });
+});
+
+describe("giveUp action creator call", () => {
+  let giveUpMock;
+  let wrapper;
+
+  beforeEach(() => {
+    giveUpMock = jest.fn();
+    wrapper = shallow(<UnconnectedInput givenUp={false} giveUp={giveUpMock} />);
+    const giveUpButton = findByTestAttr(wrapper, "give-up-button");
+    giveUpButton.simulate("click", { preventDefault: () => {} });
+  });
+
+  test("giveUp runs when the user clicks the Give Up button", () => {
+    expect(giveUpMock).toBeCalledTimes(1);
   });
 });
