@@ -24,6 +24,11 @@ describe("redux props", () => {
     const secretWordProp = wrapper.instance().props.secretWord;
     expect(secretWordProp).toEqual(secretWord);
   });
+  test("receives `secretWordError` state as a prop", () => {
+    const wrapper = setup({ secretWordError: true });
+    const secretWordErrorProp = wrapper.instance().props.secretWordError;
+    expect(secretWordErrorProp).toEqual(true);
+  });
   test("receives `guessedWords` state as a prop", () => {
     const guessedWords = [
       {
@@ -61,4 +66,21 @@ test("getSecretWord runs on App mount", () => {
 
   //more succinct way of doing the above
   expect(getSecretWordMock).toBeCalledTimes(1);
+});
+
+test("When secretWordError == true, App renders ErrorMessage Component only", () => {
+  const getSecretWordMock = jest.fn();
+  const props = {
+    getSecretWord: getSecretWordMock,
+    secretWord: null,
+    secretWordError: true,
+    givenUp: false,
+    success: false,
+    guessedWords: [],
+  };
+  const wrapper = shallow(<UnconnectedApp {...props} />);
+  const errorMessage = wrapper.find("ErrorMessage");
+  const input = wrapper.find("Input");
+  expect(errorMessage).toHaveLength(1);
+  expect(input).toHaveLength(0);
 });

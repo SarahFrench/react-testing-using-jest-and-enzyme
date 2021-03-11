@@ -7,6 +7,7 @@ import NewWord from "./NewWord";
 import GuessedWords from "./GuessedWords";
 import Input from "./Input";
 import FailureMessage from "./FailureMessage";
+import ErrorMessage from "./ErrorMessage";
 
 export class UnconnectedApp extends Component {
   componentDidMount() {
@@ -18,15 +19,21 @@ export class UnconnectedApp extends Component {
     return (
       <div className="App container">
         <h1>Jotto</h1>
-        <div>The secret word is {this.props.secretWord}</div>
-        <Congrats success={this.props.success} />
-        <FailureMessage
-          givenUp={this.props.givenUp}
-          secretWord={this.props.secretWord}
-        />
-        <NewWord />
-        <Input />
-        <GuessedWords guessedWords={this.props.guessedWords} />
+        {this.props.secretWordError ? (
+          <ErrorMessage />
+        ) : (
+          <>
+            <div>The secret word is {this.props.secretWord}</div>
+            <Congrats success={this.props.success} />
+            <FailureMessage
+              givenUp={this.props.givenUp}
+              secretWord={this.props.secretWord}
+            />
+            <NewWord />
+            <Input />
+            <GuessedWords guessedWords={this.props.guessedWords} />
+          </>
+        )}
       </div>
     );
   }
@@ -34,8 +41,8 @@ export class UnconnectedApp extends Component {
 
 const mapStateToProps = (state) => {
   //state from the redux store passed in as props here
-  const { success, guessedWords, secretWord, givenUp } = state;
-  return { success, guessedWords, secretWord, givenUp };
+  const { success, guessedWords, secretWord, secretWordError, givenUp } = state;
+  return { success, guessedWords, secretWord, secretWordError, givenUp };
 };
 
 //action creators passed in here

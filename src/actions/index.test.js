@@ -27,6 +27,23 @@ describe("getSecretWord", () => {
     const newState = store.getState();
     expect(newState.secretWord).toBe(secretWord);
   });
+  test("sets error state if no secret word can be requested", async () => {
+    const store = storeFactory();
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 500,
+        response: "",
+      });
+    });
+
+    //IMPORTANT
+    //wait for the Promise from dispatch before assertions
+    await store.dispatch(getSecretWord());
+    const newState = store.getState();
+    expect(newState.secretWordError).toBe(true);
+    expect(newState.secretWord).toBeNull();
+  });
 });
 
 describe("resetGame", () => {
