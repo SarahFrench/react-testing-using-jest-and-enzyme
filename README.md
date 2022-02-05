@@ -2,7 +2,7 @@
 
 This repo is the course materials from completing the React class components + Redux part of the [React Testing with Jest and Enzyme](https://www.udemy.com/course/react-testing-with-jest-and-enzyme) Udemy course.
 
-Add parts were build using TDD, including unguided challenges at the end of the course.
+All parts were build using TDD, including unguided challenges at the end of the course.
 
 ## Getting started
 
